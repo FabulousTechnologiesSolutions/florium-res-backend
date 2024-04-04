@@ -26,7 +26,6 @@
 
             service.textSearch(request, function(results, status) {
                 if (status === google.maps.places.PlacesServiceStatus.OK) {
-                    results = results.slice(0,2)
                     results.forEach(function(place) {
                         var restaurant = {
                             name: place.name,
@@ -38,9 +37,11 @@
                             isOpen: '',
                             reviews: [],
                             photos: [],
+                            latitude: place.geometry.location.lat(),
+                            longitude: place.geometry.location.lng(),
                             id: idCounter++ // Assign unique ID using idCounter
                         };
-
+                        
                         // Fetch additional details for the place
                         service.getDetails({
                             placeId: place.place_id
@@ -79,14 +80,14 @@
                 }
             });
         }
-
+        
         function updateResponse(restaurants) {
             document.getElementById('response').textContent = JSON.stringify(restaurants, null, 2);
         }
         function ResturantDiv(restaurant) {
             const ratingStars = getRatingStars(restaurant.rating);
             const restaurantId = restaurant.id;
-            const queryString = `?name=${encodeURIComponent(restaurant.name)}&address=${encodeURIComponent(restaurant.address)}&rating=${restaurant.rating}&types=${encodeURIComponent(JSON.stringify(restaurant.types))}&phone=${encodeURIComponent(restaurant.phone)}&website=${encodeURIComponent(restaurant.website)}&isOpen=${restaurant.isOpen}&id=${restaurantId}&photos=${encodeURIComponent(JSON.stringify(restaurant.photos))}`;
+            const queryString = `?name=${encodeURIComponent(restaurant.name)}&address=${encodeURIComponent(restaurant.address)}&rating=${restaurant.rating}&latitude=${restaurant.latitude}&longitude=${restaurant.longitude}&types=${encodeURIComponent(JSON.stringify(restaurant.types))}&phone=${encodeURIComponent(restaurant.phone)}&website=${encodeURIComponent(restaurant.website)}&isOpen=${restaurant.isOpen}&id=${restaurantId}&photos=${encodeURIComponent(JSON.stringify(restaurant.photos))}`;
             document.getElementById('response').insertAdjacentHTML("beforeend", `
                 <div class="col-12 col-sm-6 col-lg-4 mt-3">
                     <div class="p-2 h-100 pointer restaurant-div" data-restaurant-id="${restaurantId}"  onclick="openTab('${queryString}')">
@@ -99,6 +100,8 @@
                                             <i class="fa-solid text-prpl fa-location-dot fs-5"></i>
                                             <p class="mb-0 text-black mx-2 na locationjs">${restaurant['address']}</p>
                                         </div>
+                                        <p class="mb-0 text-black mx-2 na locationjs">${restaurant['latitude']}</p>
+                                        <p class="mb-0 text-black mx-2 na locationjs">${restaurant['longitude']}</p>
                                         <p class="mb-0 text-prpl fw-md fs-6 mt-1 namejs">${restaurant['name']}</p>
                                     </div>
                                     <a href="#"> <i class="fa-regular fs-3 text-prpl fa-heart text-black"></i></a>
