@@ -328,82 +328,45 @@
             </div>
     </section>
     @include('admin.template.jslinks')
-    <h1 >latitude:
-        <span class="latitude"></span>
-    </h1>
-    <h1 >longitude:
-        <span class="longitude"></span>
-    </h1>
+
 </body>
 
 <script>
-    // // Initialize and add the map
-    // let map;
-    
-    // async function initMap() {
-    // // The location of Uluru
-    // const position = { lat: -25.344, lng: 131.031 };
-    // // Request needed libraries.
-    // //@ts-ignore
-    // const { Map } = await google.maps.importLibrary("maps");
-    // const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
 
-    // // The map, centered at Uluru
-    // map = new Map(document.getElementById("map"), {
-    //     zoom: 4,
-    //     center: position,
-    //     mapId: "DEMO_MAP_ID",
-    // });
+    let map;
 
-    // // The marker, positioned at Uluru
-    // const marker = new AdvancedMarkerElement({
-    //     map: map,
-    //     position: position,
-    //     title: "Uluru",
-    // });
-    // }
+    async function initMap() {
+        // Get latitude and longitude values from URL parameters
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const latitude = parseFloat(urlParams.get('latitude'));
+        const longitude = parseFloat(urlParams.get('longitude'));
+        
+        // The map, centered at the retrieved position
+        map = new google.maps.Map(document.getElementById("map"), {
+            zoom: 15, // Adjust zoom level as needed
+            center: { lat: latitude, lng: longitude },
+        });
 
-    // initMap();
+        // Create a marker for the retrieved position
+        const marker = new google.maps.Marker({
+            position: { lat: latitude, lng: longitude },
+            map: map,
+            title: "Restaurant Location",
+        });
+    }
 
-let map;
+    function loadMapScript() {
+        const script = document.createElement("script");
+        script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyAu1gwHCSzLG9ACacQqLk-LG8oJMkarNF0&libraries=drawing,places&callback=initMap`;
+        script.defer = true;
+        script.async = true;
+        document.head.appendChild(script);
+    }
 
-async function initMap() {
-    // Get latitude and longitude values from URL parameters
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    const latitude = parseFloat(urlParams.get('latitude'));
-    const longitude = parseFloat(urlParams.get('longitude'));
-    
-    // The map, centered at the retrieved position
-    map = new google.maps.Map(document.getElementById("map"), {
-        zoom: 15, // Adjust zoom level as needed
-        center: { lat: latitude, lng: longitude },
-    });
-
-    // Create a marker for the retrieved position
-    const marker = new google.maps.Marker({
-        position: { lat: latitude, lng: longitude },
-        map: map,
-        title: "Restaurant Location",
-    });
-}
-
-// Load Google Maps API asynchronously with the callback to initMap
-function loadMapScript() {
-    const script = document.createElement("script");
-    script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyAu1gwHCSzLG9ACacQqLk-LG8oJMkarNF0&libraries=drawing,places&callback=initMap`;
-    script.defer = true;
-    script.async = true;
-    document.head.appendChild(script);
-}
-
-// Call the function to load the map script
-loadMapScript();
+    loadMapScript();
 
 </script>
-
-
-
 
 <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAu1gwHCSzLG9ACacQqLk-LG8oJMkarNF0&libraries=drawing,places&callback=initMap">
