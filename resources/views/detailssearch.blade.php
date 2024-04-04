@@ -15,6 +15,7 @@
             const urlParams = new URLSearchParams(queryString);
             const name = urlParams.get('name');
             const address = urlParams.get('address');
+            const totalReviews = urlParams.get('totalReviews');
             const rating = urlParams.get('rating');
             const types = JSON.parse(urlParams.get('types'));
             const phone = urlParams.get('phone');
@@ -24,8 +25,13 @@
             const photos = JSON.parse(urlParams.get('photos'));
             const latitude = urlParams.get('latitude');
             const longitude = urlParams.get('longitude');
-            console.log("Latitude: " + latitude);
-            console.log("Longitude: " + longitude);
+
+            document.querySelectorAll('.totalReviews').forEach(elem => {
+                elem.innerText = totalReviews;
+            });
+            console.log("totalReviews: " + totalReviews);
+            // console.log("Longitude: " + longitude);
+           
             document.querySelectorAll('.latitude').forEach(elem => {
                 elem.innerText = latitude;
             });
@@ -38,6 +44,7 @@
             document.querySelectorAll('.address').forEach(elem => {
                 elem.innerText = address;
             });
+           
             document.querySelectorAll('.rating').forEach(elem => {
                 elem.innerText = rating;
             });
@@ -242,7 +249,7 @@
                                                 <p class="mb-0 text-prpl fs-5">
                                                     Total Reviews
                                                 </p>
-                                                <p clss="mb-0 small"> reviews</p>
+                                                <p class="mb-0 small totalReviews"></p>
                                                 <div class="mt-2">
                                                     <i class="fa-solid fs-5 yellow fa-star"></i>
                                                     <i class="fa-solid fs-5 yellow fa-star"></i>

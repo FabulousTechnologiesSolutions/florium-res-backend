@@ -58,6 +58,8 @@
                                     restaurant.isOpen = 'Unknown';
                                 }
 
+                                restaurant.numberOfGoogleReviews = placeDetails.reviews ? placeDetails.reviews.length : 0;
+
                                 if (placeDetails.reviews && placeDetails.reviews.length > 0) {
                                     placeDetails.reviews.forEach(function(review) {
                                         restaurant.reviews.push({
@@ -87,9 +89,24 @@
             document.getElementById('response').textContent = JSON.stringify(restaurants, null, 2);
         }
         function ResturantDiv(restaurant) {
+
             const ratingStars = getRatingStars(restaurant.rating);
             const restaurantId = restaurant.id;
-            const queryString = `?name=${encodeURIComponent(restaurant.name)}&address=${encodeURIComponent(restaurant.address)}&rating=${restaurant.rating}&latitude=${restaurant.latitude}&longitude=${restaurant.longitude}&types=${encodeURIComponent(JSON.stringify(restaurant.types))}&phone=${encodeURIComponent(restaurant.phone)}&website=${encodeURIComponent(restaurant.website)}&isOpen=${restaurant.isOpen}&id=${restaurantId}&photos=${encodeURIComponent(JSON.stringify(restaurant.photos))}`;
+            const totalReviews = restaurant.reviews.length; 
+
+              // Calculate the sum of total reviews by clients
+              let totalRating = 0;
+            restaurant.reviews.forEach(review => {
+                totalRating += review.rating;
+            });
+
+            const averageRating = totalRating / totalReviews;
+
+            const queryString = `?name=${encodeURIComponent(restaurant.name)}&address=${encodeURIComponent(restaurant.address)}&totalReviews=${totalReviews}&rating=${restaurant.rating}&latitude=${restaurant.latitude}&longitude=${restaurant.longitude}&types=${encodeURIComponent(JSON.stringify(restaurant.types))}&phone=${encodeURIComponent(restaurant.phone)}&website=${encodeURIComponent(restaurant.website)}&isOpen=${restaurant.isOpen}&id=${restaurantId}&photos=${encodeURIComponent(JSON.stringify(restaurant.photos))}`;
+            
+            // const ratingStars = getRatingStars(restaurant.rating);
+            // const restaurantId = restaurant.id;
+            // const queryString = `?name=${encodeURIComponent(restaurant.name)}&address=${encodeURIComponent(restaurant.address)}&rating=${restaurant.rating}&latitude=${restaurant.latitude}&longitude=${restaurant.longitude}&types=${encodeURIComponent(JSON.stringify(restaurant.types))}&phone=${encodeURIComponent(restaurant.phone)}&website=${encodeURIComponent(restaurant.website)}&isOpen=${restaurant.isOpen}&id=${restaurantId}&photos=${encodeURIComponent(JSON.stringify(restaurant.photos))}`;
             document.getElementById('response').insertAdjacentHTML("beforeend", `
                 <div class="col-12 col-sm-6 col-lg-4 mt-3">
                     <div class="p-2 h-100 pointer restaurant-div" data-restaurant-id="${restaurantId}"  onclick="openTab('${queryString}')">
@@ -102,9 +119,8 @@
                                             <i class="fa-solid text-prpl fa-location-dot fs-5"></i>
                                             <p class="mb-0 text-black mx-2 na locationjs">${restaurant['address']}</p>
                                         </div>
-                                        <p class="mb-0 text-black mx-2 na locationjs">${restaurant['latitude']}</p>
-                                        <p class="mb-0 text-black mx-2 na locationjs">${restaurant['longitude']}</p>
                                         <p class="mb-0 text-prpl fw-md fs-6 mt-1 namejs">${restaurant['name']}</p>
+                                        <p class="mb-0 text-prpl fw-md fs-6 mt-1 namejs">${totalReviews}</p>
                                     </div>
                                     <a href="#"> <i class="fa-regular fs-3 text-prpl fa-heart text-black"></i></a>
                                 </div>
