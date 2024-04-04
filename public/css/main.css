@@ -316,6 +316,14 @@ textarea {
     -webkit-box-shadow: 0 0 0px 1000px var(--blue-1) inset;
     transition: background-color 5000s ease-in-out 0s;
 }
+
+.sldimgnew{
+    border-radius: 20px;
+    width: calc(100% - 10px);
+    height: 175px;
+    object-fit: cover;
+    margin: 0 10px;
+}
 @media screen and (max-width:767px) {
     .panel-left {
         position: absolute;

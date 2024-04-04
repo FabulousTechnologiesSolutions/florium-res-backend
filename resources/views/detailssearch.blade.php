@@ -79,13 +79,32 @@
                 }
             });
 
-            const imgContainers = document.querySelectorAll('.center2 img');
-            for (let index = 0; index < Math.min(6, photos.length); index++) {
-                imgContainers[index].src = photos[index];
+            // --slider-imgs-----
+            const centern = document.querySelector('.centern');
+            centern.innerHTML = '';
+
+            if (photos.length > 0) {
+                for (let index = 0; index < photos.length; index++) {
+                    // Check if the current index is less than the maximum allowed (4)
+                    if (index < 4) {
+                        const imgDiv = document.createElement('div');
+                        imgDiv.classList.add('col-3');
+                        imgDiv.classList.add('my-4');
+                        imgDiv.classList.add(`img${index + 1}`);
+                        const img = document.createElement('img');
+                        img.src = photos[index] ? photos[index] : '';
+                        img.alt = 'Image ' + (index + 1);
+                        img.classList.add('sldimgnew');
+                        imgDiv.appendChild(img);
+                        centern.appendChild(imgDiv);
+                    } else {
+                        break;
+                    }
+                }
             }
+
         }
-    </script>
-    <script>
+   
         const ratingValue = fetchRatingValue();
         function fetchRatingValue() {
             return Math.random() * 5;
@@ -118,21 +137,21 @@
         ratingText.textContent = ratingValue.toFixed(2);
     </script>
     @include('admin.template.navbar')
-    <section class="py-5 py-sm-5 ">
+    <section class="py-3 ">
         <div class="mycontainer ">
-            <div class="position-relative bg-ltw p-4 sld">
-                <div class="center2 ">
-                    <div class="img1">
-                        <img src="" alt="ee" class="sldimg">
+            <div class="position-relative bg-ltw sld">
+                <div class="centern d-flex px-4">
+                    <div class="col-3 img1">
+                        <img src="" alt="ee" class=" w-100">
                     </div>
-                    <div class="img2">
-                        <img src="" alt="ee" class="sldimg">
+                    <div class="col-3 img2">
+                        <img src="" alt="ee" class=" w-100">
                     </div>
-                    <div class="img3">
-                        <img src="" alt="ee" class="sldimg">
+                    <div class="col-3 img3">
+                        <img src="" alt="ee" class=" w-100">
                     </div>
-                    <div class="img4">
-                        <img src="" alt="ee" class="sldimg">
+                    <div class="col-3 img4">
+                        <img src="" alt="ee" class=" w-100">
                     </div>
                 </div>
             </div>
@@ -367,7 +386,21 @@
     loadMapScript();
 
 </script>
-
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var galleryContainers = document.querySelectorAll('.mt-3 .d-flex .h-75 .col-4');
+    
+        galleryContainers.forEach(function(container) {
+            var images = container.querySelectorAll('img');
+            
+            images.forEach(function(image) {
+                if (!image.getAttribute('src')) {
+                    image.style.display = 'none';
+                }
+            });
+        });
+    });
+    </script>
 <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAu1gwHCSzLG9ACacQqLk-LG8oJMkarNF0&libraries=drawing,places&callback=initMap">
 </script>
