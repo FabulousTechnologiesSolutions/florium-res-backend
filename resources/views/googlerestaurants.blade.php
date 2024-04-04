@@ -120,7 +120,7 @@
                                             <p class="mb-0 text-black mx-2 na locationjs">${restaurant['address']}</p>
                                         </div>
                                         <p class="mb-0 text-prpl fw-md fs-6 mt-1 namejs">${restaurant['name']}</p>
-                                        <p class="mb-0 text-prpl fw-md fs-6 mt-1 namejs">${totalReviews}</p>
+                                        
                                     </div>
                                     <a href="#"> <i class="fa-regular fs-3 text-prpl fa-heart text-black"></i></a>
                                 </div>
