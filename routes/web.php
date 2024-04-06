@@ -27,10 +27,8 @@ Route::group(['middleware' => ['AdminMiddleware']], function () {
             Route::post('updatefaq', 'updatefaq')->name('admin.updatefaq');
             Route::get('deletefaq/{id}','deletefaq');
 
-
             Route::get('manageabout','manageabout')->name('admin.manageabout');
             Route::post('updateabout', 'updateabout')->name('admin.updateabout');
-
 
             Route::get('managefood','managefood')->name('admin.managefood');
             Route::get('addfood','addfood')->name('admin.addfood');
@@ -44,7 +42,10 @@ Route::group(['middleware' => ['AdminMiddleware']], function () {
             Route::get('fromqueries','fromqueries')->name('admin.fromqueries');
             Route::get('deletequery/{id}','deletequery');
 
-
+            Route::get('manageuser','manageuser')->name('admin.manageuser');
+            Route::get('deleteuser/{id}','deleteuser');
+            Route::get('managelogo','managelogo')->name('admin.managelogo');
+            Route::post('updatelogo','updatelogo')->name('admin.updatelogo');
         });
     });
 });

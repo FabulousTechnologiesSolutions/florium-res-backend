@@ -1,7 +1,10 @@
+@php
+    $logo = App\Models\Logo::first();
+@endphp
 <nav class="navbar navbar-expand-md shadow-sm">
     <div class="mycontainer py-2 d-flex flex-wrap justify-content-between">
         <a class="navbar-brand me-xl-5 pe-xl-3 text-prpl" href="{{ route('/') }}">
-            Restaurant Searching
+            <img src="<?php echo asset('uploads/' . $logo->logo); ?>" class="w-100" alt="">
         </a>
         <button class="navbar-toggler text-white px-0 py-0 border-0 focus-none" type="button" data-bs-toggle="collapse"
             data-bs-target="#mynavbar">
@@ -11,7 +14,7 @@
             <ul class="navbar-nav me-auto">
                 <li class="nav-item px-lg-2">
                     <a
-                        class="nav-link {{ request()->routeIs('/','searchfilter','detailssearch') ? 'active-color' : '' }}"href="{{ route('/') }}">Home</a>
+                        class="nav-link {{ request()->routeIs('/','searchfilter','detailssearch') ? 'active-color' : '' }}" href="{{ route('/') }}">Home</a>
                 </li>
                 <li class="nav-item px-lg-2">
                     <a class="nav-link {{ request()->routeIs('about') ? 'active-color' : '' }}"

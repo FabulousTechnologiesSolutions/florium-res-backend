@@ -10,6 +10,7 @@ use App\Models\Restaurant;
 use App\Models\RestaurantImages;
 use App\Models\User;
 use App\Models\Review;
+use App\Models\Logo;
 use Illuminate\Http\Request;
 class AdminController extends Controller
 {
@@ -303,8 +304,15 @@ class AdminController extends Controller
         $data->delete();
         return redirect()->route('admin.managefaq')->with ('Delete','Faq Deleted Successfully');
     }
-
-
+    public function manageuser(){
+        $data =User::where('role',1)->orderBy('id', 'desc')->get();
+        return view('admin.manageuser',['users'=>$data]);
+    }
+    public function deleteuser($id){
+        $data =User::find($id);
+        $data->delete();
+        return redirect()->route('admin.manageuser')->with ('Delete','User Deleted Successfully');
+    }
     public function manageabout(){
         $details = About::first();
         if($details) {
@@ -347,8 +355,48 @@ class AdminController extends Controller
             return redirect()->route('admin.manageabout')->with('success', 'About Data added successfully');
         }
     }
-
-
+    public function managelogo(){
+        $details = Logo::first();
+        if($details) {
+            $data['details'] = $details;
+        } else {
+            $data['details'] = [];
+        }
+        return view('admin.managelogo', $data);
+    }
+    public function updatelogo(Request $request) {
+        $about = Logo::find(1);
+    
+        $request->validate([
+            'logo' => 'sometimes|required|file|mimes:jpeg,png,jpg,svg,webp',
+        ]);
+    
+        $data = $request->except('_token', '_method');
+    
+        if ($request->hasFile('logo')) {
+            $image = $request->file('logo');
+            $image_name = time() . "-" . $image->getClientOriginalName();
+            $image_destination = public_path('uploads');
+            $image->move($image_destination, $image_name);
+            $data['logo'] = $image_name;
+    
+            if ($about && $about->image) {
+                $oldImagePath = public_path('uploads/' . $about->image);
+                if (file_exists($oldImagePath)) {
+                    unlink($oldImagePath);
+                }
+            }
+        }
+    
+        if ($about) {
+            $about->update($data);
+            return redirect()->route('admin.managelogo')->with('update', 'Logo updated successfully');
+        } else {
+            Logo::create($data);
+            return redirect()->route('admin.managelogo')->with('success', 'Logo added successfully');
+        }
+    }
+    
     public function managefood(){
         $data = Food::orderBy('id', 'desc')->take(4)->get();
         return view('admin.managefood', ['types' => $data]);

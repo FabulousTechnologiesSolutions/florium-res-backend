@@ -27,6 +27,10 @@
                     class=" {{ request()->routeIs('admin.managecontact') ? 'active' : '' }}">Manage contact</a></li>
             <li><a href="{{ route('admin.managereviews') }}"
                     class=" {{ request()->routeIs('admin.managereviews') ? 'active' : '' }}">Manage Reviews</a></li>
+            <li><a href="{{ route('admin.manageuser') }}"
+                        class=" {{ request()->routeIs('admin.manageuser') ? 'active' : '' }}">Manage Users</a></li>
+            <li><a href="{{ route('admin.managelogo') }}"
+                class=" {{ request()->routeIs('admin.managelogo') ? 'active' : '' }}">Manage Logo</a></li>
         </ul>
     </div>
     <div class="text-center mt-auto py-4">
