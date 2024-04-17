@@ -15,8 +15,11 @@
                     <h1 class="display-4 fw-md text-center text-sm-start text-black">About Us
                     </h1>
                     <p class="mb-0 text-black">
-                        {{ $data['details']->systemdetails }}
+                        @if(isset($data['details']->systemdetails))
+                            {{ $data['details']->systemdetails }}
+                        @endif
                     </p>
+                    
                 </div>
                 <div class="col-sm-6 col-lg-5 px-4 position-relative">
                     <img src="{{ asset('img/home-img.png') }}" class="w-100 px-3 px-sm-0 px-4 px-xl-5" alt="">
