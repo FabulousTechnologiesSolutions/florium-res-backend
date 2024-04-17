@@ -4,7 +4,7 @@
 <head>
     @include('admin.template.csslinks')
     <title>Home</title>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAu1gwHCSzLG9ACacQqLk-LG8oJMkarNF0&libraries=places">
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAu1gwHCSzLG9ACacQqLk-LG8oJMkarNF0&loading=async&libraries=places">
     </script>
     <script>
         var restaurants = [];
@@ -279,7 +279,7 @@
     @include('admin.template.loinsignup')
     @include('admin.template.jslinks')
     <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAu1gwHCSzLG9ACacQqLk-LG8oJMkarNF0&libraries=drawing,places&callback=initAutocomplete">
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAu1gwHCSzLG9ACacQqLk-LG8oJMkarNF0&loading=async&libraries=drawing,places&callback=initAutocomplete">
     </script>
     <script>
         function initAutocomplete() {
