@@ -4,8 +4,10 @@
 <nav class="navbar navbar-expand-md shadow-sm">
     <div class="mycontainer py-2 d-flex flex-wrap justify-content-between">
         <a class="navbar-brand me-xl-5 pe-xl-3 text-prpl" href="{{ route('/') }}">
-            <img src="<?php echo asset('uploads/' . $logo->logo); ?>" class="w-100" alt="">
-        </a>
+            @if($logo)
+                <img src="{{ asset('uploads/' . $logo->logo) }}" class="w-100" alt="">
+            @endif
+        </a>        
         <button class="navbar-toggler text-white px-0 py-0 border-0 focus-none" type="button" data-bs-toggle="collapse"
             data-bs-target="#mynavbar">
             <i class="fa-solid fa-bars fs-3 text-prpl"></i>
