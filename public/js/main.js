@@ -67,10 +67,12 @@ $(document).ready(function () {
 
     $(".login-model").hide();
     $(".reg-model").hide();
+    $(".email-model").hide();
     $(".login-btn").click(function () {
         $(".login-model").show();
         $("body").addClass("active");
         $(".reg-model").hide();
+        $(".email-model").hide();
     });
     $(".close-login").click(function () {
         $(".login-model").hide();
@@ -80,9 +82,20 @@ $(document).ready(function () {
         $(".reg-model").show();
         $("body").addClass("active");
         $(".login-model").hide();
+        $(".email-model").hide();
     });
     $(".close-reg").click(function () {
         $(".reg-model").hide();
+        $("body").removeClass("active");
+    });
+    $(".email-open").click(function () {
+        $(".email-model").show();
+        $("body").addClass("active");
+        $(".login-model").hide();
+        $(".reg-model").hide();
+    });
+    $(".close-email").click(function () {
+        $(".email-model").hide();
         $("body").removeClass("active");
     });
 });
