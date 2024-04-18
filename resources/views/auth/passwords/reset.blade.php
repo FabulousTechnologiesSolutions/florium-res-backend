@@ -77,7 +77,7 @@
 
 <head>
     @include('admin.template.csslinks')
-    <title>Add FAQ</title>
+    <title>Reset PAssword</title>
 </head>
 
 <body>
