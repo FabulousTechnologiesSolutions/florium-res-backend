@@ -53,6 +53,7 @@ Route::group(['middleware' => ['AdminMiddleware']], function () {
 
 Route::controller(WebController::class)->group(function(){
     Route::get('about','about')->name('about');
+    Route::get('terms','terms')->name('terms');
     Route::get('contact','contact')->name('contact');
     Route::post('send','send')->name('send');
     Route::get('details/{id}','details')->name('details');

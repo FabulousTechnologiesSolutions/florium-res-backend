@@ -48,8 +48,7 @@
                                 Help?
                             </h2>
                             <a href="#" class="d-block my-2 text-light text-decoration-none">FAQ</a>
-                            <a href="#" class="d-block my-2 text-light text-decoration-none">Term &
-                                Conditi0on</a>
+                            <a href="{{ route('terms') }}" class="d-block my-2 text-light text-decoration-none">Terms of Use</a>
                             <a href="#" class="d-block my-2 text-light text-decoration-none">Privacy
                                 Policy</a>
                         </div>
@@ -79,7 +78,7 @@
             </div>
             <div class="col-md-5">
                 <div class="d-flex flex-wrap justify-content-center justify-content-md-end align-items-center">
-                    <a href="#" class="text-white text-decoration-none">Terms & Condition</a>
+                    <a href="{{ route('terms') }}" class="text-white text-decoration-none">Terms of Use</a>
                     <span class="px-2 px-lg-3">|</span>
                     <a href="#" class="text-white text-decoration-none">Privacy Policy</a>
                 </div>

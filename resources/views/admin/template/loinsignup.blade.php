@@ -145,8 +145,13 @@
                                         placeholder="Confirm Password" name="password_confirmation" required
                                         autocomplete="new-password">
                                 </div>
-
                                 <div class="mt-4 d-flex justify-content-center justify-content-between">
+                                    <div class="d-flex align-items-center ">
+                                        <input type="checkbox" name="terms" id="terms" class="me-1 me-sm-2 " required>
+                                        <label for="terms">Agree our <a href="{{ route('terms') }}">Terms of use</a></label>
+                                    </div>
+                                </div>
+                                <div class="mt-2 d-flex justify-content-center justify-content-between">
                                     <div class="d-flex align-items-center">
                                         <input type="checkbox" id="remember" class="me-1 me-sm-2 " name="remember"
                                             id="remember" {{ old('remember') ? 'checked' : '' }}>

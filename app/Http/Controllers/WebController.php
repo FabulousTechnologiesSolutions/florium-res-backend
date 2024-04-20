@@ -172,7 +172,9 @@ class WebController extends Controller
     public function detailssearch(){
         return view('detailssearch');
     }       
-     
+    public function terms(){
+        return view('terms');
+    }
 } 
 
 
