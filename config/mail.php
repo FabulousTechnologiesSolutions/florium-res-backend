@@ -36,16 +36,26 @@ return [
 
     'mailers' => [
 
+        // 'smtp' => [
+        //     'transport' => 'smtp',
+        //     'url' => env('MAIL_URL'),
+        //     'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
+        //     'port' => env('MAIL_PORT', 587),
+        //     'encryption' => env('MAIL_ENCRYPTION', 'tls'),
+        //     'username' => env('MAIL_USERNAME'),
+        //     'password' => env('MAIL_PASSWORD'),
+        //     'timeout' => null,
+        //     'local_domain' => env('MAIL_EHLO_DOMAIN'),
+        // ],
         'smtp' => [
             'transport' => 'smtp',
-            'url' => env('MAIL_URL'),
-            'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
-            'port' => env('MAIL_PORT', 587),
-            'encryption' => env('MAIL_ENCRYPTION', 'tls'),
+            'host' => env('MAIL_HOST'),
+            'port' => env('MAIL_PORT'),
+            'encryption' => env('MAIL_ENCRYPTION'),
             'username' => env('MAIL_USERNAME'),
             'password' => env('MAIL_PASSWORD'),
             'timeout' => null,
-            'local_domain' => env('MAIL_EHLO_DOMAIN'),
+            'auth_mode' => null,
         ],
 
         'ses' => [
@@ -59,15 +69,15 @@ return [
             //     'timeout' => 5,
             // ],
         ],
-        'mailgun' => [
-            'transport' => 'mailgun',
-            // 'domain' => env('MAILGUN_DOMAIN'),
-            // 'secret' => env('MAILGUN_SECRET'),
-            // 'endpoint' => env('MAILGUN_ENDPOINT', 'api.mailgun.net'),
-            // 'client' => [
-            //     'timeout' => 5,
-            // ],
-        ],
+        // 'mailgun' => [
+        //     'transport' => 'mailgun',
+        //     // 'domain' => env('MAILGUN_DOMAIN'),
+        //     // 'secret' => env('MAILGUN_SECRET'),
+        //     // 'endpoint' => env('MAILGUN_ENDPOINT', 'api.mailgun.net'),
+        //     // 'client' => [
+        //     //     'timeout' => 5,
+        //     // ],
+        // ],
         'sendmail' => [
             'transport' => 'sendmail',
             'path' => env('MAIL_SENDMAIL_PATH', '/usr/sbin/sendmail -bs -i'),
@@ -89,13 +99,13 @@ return [
                 'log',
             ],
         ],
-        'roundrobin' => [
-            'transport' => 'roundrobin',
-            'mailers' => [
-                'ses',
-                'postmark',
-            ],
-        ],
+        // 'roundrobin' => [
+        //     'transport' => 'roundrobin',
+        //     'mailers' => [
+        //         'ses',
+        //         'postmark',
+        //     ],
+        // ],
     ],
 
     /*
